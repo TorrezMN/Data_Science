@@ -1,5 +1,4 @@
 # Data_Science
----
 - In this repo you will find some EDA projects carried out on different topics.
 
 ## Project List
