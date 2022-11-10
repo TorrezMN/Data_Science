@@ -1,2 +1,3 @@
-# Data_Science
-Repositorios relacionados con data science.
+# Encuesta Baches
+
+- Pequeña encuesta realizada para el proyecto de fin de carrera.

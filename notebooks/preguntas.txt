@@ -1,27 +1,48 @@
-Marca temporal
-1) Tipo de ocupación:
-2) Tipo de relación contractual 
-3) Mercado en el que se desempeña
-4) Rubro de la empresa con la que tiene contrato
-5) Rol principal desempeñado
-6) ¿Cuántos años de experiencia en la industria posee?
-7) Nivel de seniority que Ud. considera que posee:
-8) Nivel de seniority que le asignan en su trabajo actual (aunque no sea en forma explícita, si puede inferir igual indique):
-9) Nivel de educación
-10) Lugar de educación (carrera de grado, incluso si aún está cursando)
-11) Nivel de ingreso mensual en USD
-12) ¿Percibe alguno de los siguientes beneficios? (múltiples opciones)
-13) En caso que trabaje con compañeros extranjeros, ¿cómo percibe su remuneración con relación a los demás compañeros?
-14) ¿En cuál de las siguientes áreas técnicas mejor encaja el desarrollo de sus actividades profesionales? - Seleccionar la principal.
-15) En su lugar actual de trabajo, ¿cuántas vacantes para el área de tecnología estima que existen actualmente?
-16) En la empresa para la que trabaja, ¿existen políticas orientadas a la retención y/o captación del capital humano especialmente del área de IT?
-17) ¿Cuál de los siguientes factores considera el más importante al elegir una opción laboral?
-18) ¿Cuál de los siguientes factores considera el segundo más importante al elegir una opción laboral?
-19) ¿Ha participado en procesos de selección para empresas internacionales? (directamente o a través de empresas locales)
-20) ¿Con qué frecuencia recibes ofertas laborales? (por cualquier medio, ofertas locales o internacionales. Las invitaciones a aplicar ya cuentan)
-21) ¿Cuál de las siguientes le parece que es la mayor dificultad al aplicar para cargos en empresas internacionales?
-22) Si Ud. trabaja para el exterior, Imagine que está comparando un “senior” paraguayo con lo que en el mercado internacional se espera de un “senior”. ¿Cómo percibe la diferencia de seniority entre el mercado local y el internacional?
-23) Si Ud. trabaja para el exterior, ¿cuál considera que es el tipo de perfil más requerido?
-24) Si Ud. ya participó en procesos de selección para el exterior, ¿Qué afirmación considera la más acertada en cuanto a la educación formal (carreras de grado o postgrados en universidades locales) de los profesionales paraguayos?
-25) Si Ud. ya está trabajando para el exterior ¿cuál considera el mayor desafío en el desempeño de sus funciones?
-26) ¿Cuál es el nivel mínimo de inglés que considera necesario para su función actual? (local o extranjero)
+0) Marca temporal 
+ 
+ 
+1) Lugar de residencia. 
+ 
+ 
+2) Si selecciono PARAGUAY como lugar de residencia. Puede indicar el departamento en el que vive actualmente. 
+ 
+ 
+3) Como calificaría el estado de las calles en su lugar de residencia. 
+ 
+ 
+4) Considera que exista un problema de baches en su lugar de residencia. 
+ 
+ 
+5) Puede hacer una estimación de la cantidad de baches en su lugar de residencia. 
+ 
+ 
+6) Tipo de camino en su lugar de residencia. 
+ 
+ 
+7) Cuanto tiempo cree que demora la reparación de baches en su lugar de residencia. 
+ 
+ 
+8) Conoce algún método para denunciar la existencia de baches en su lugar de residencia. 
+ 
+ 
+9) Puede acceder a información sobre los baches de su lugar de residencia. (Denuncias, ubicación y tareas de reparación de baches.) 
+ 
+ 
+10) Usted sufrió accidentes a causa de baches en su lugar de residencia. 
+ 
+ 
+11) Si tiene vehículo. Cuan frecuentemente debe hacer mantenimiento a causa del estado de las calles o baches de su lugar de residencia. 
+ 
+ 
+12) Denunciaría la existencia de baches en su lugar de residencia. 
+ 
+ 
+13) Cree que seria util conocer la ubicación y otros datos de los baches en su lugar de residencia. 
+ 
+ 
+14) Si considera que su lugar de residencia tiene un problema de baches. Como califica la repuesta gubernamental al problema. 
+ 
+ 
+15) Puede estimar la regularidad con la que se reparan las calles en su lugar de residencia actual. 
+ 
+ 
