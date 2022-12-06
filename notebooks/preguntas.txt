@@ -46,3 +46,51 @@
 15) Puede estimar la regularidad con la que se reparan las calles en su lugar de residencia actual. 
  
  
+0) Marca temporal 
+ 
+ 
+1) Lugar de residencia. 
+ 
+ 
+2) Si selecciono PARAGUAY como lugar de residencia. Puede indicar el departamento en el que vive actualmente. 
+ 
+ 
+3) Como calificaría el estado de las calles en su lugar de residencia. 
+ 
+ 
+4) Considera que exista un problema de baches en su lugar de residencia. 
+ 
+ 
+5) Puede hacer una estimación de la cantidad de baches en su lugar de residencia. 
+ 
+ 
+6) Tipo de camino en su lugar de residencia. 
+ 
+ 
+7) Cuanto tiempo cree que demora la reparación de baches en su lugar de residencia. 
+ 
+ 
+8) Conoce algún método para denunciar la existencia de baches en su lugar de residencia. 
+ 
+ 
+9) Puede acceder a información sobre los baches de su lugar de residencia. (Denuncias, ubicación y tareas de reparación de baches.) 
+ 
+ 
+10) Usted sufrió accidentes a causa de baches en su lugar de residencia. 
+ 
+ 
+11) Si tiene vehículo. Cuan frecuentemente debe hacer mantenimiento a causa del estado de las calles o baches de su lugar de residencia. 
+ 
+ 
+12) Denunciaría la existencia de baches en su lugar de residencia. 
+ 
+ 
+13) Cree que seria util conocer la ubicación y otros datos de los baches en su lugar de residencia. 
+ 
+ 
+14) Si considera que su lugar de residencia tiene un problema de baches. Como califica la repuesta gubernamental al problema. 
+ 
+ 
+15) Puede estimar la regularidad con la que se reparan las calles en su lugar de residencia actual. 
+ 
+ 
