@@ -21,7 +21,7 @@ def print_column_uniques(df, col):
     print(set(itertools.chain.from_iterable([i.split(";") for i in df[col]])))
 
 
-def make_df(df, col):
+def make_df(df, col, x_label, y_label):
     """
     Returns a dataframe from column values.
     Column format:
@@ -38,7 +38,7 @@ def make_df(df, col):
     for i in c:
         cats[i] = df[df[col].str.contains(i)].shape[0]
     df = pd.DataFrame(
-        data=[i for i in cats.items()], columns=["cat", "count"]
-    ).set_index("cat")
+        data=[i for i in cats.items()], columns=[x_label.replace(' ', ''), y_label.replace(' ', '')]
+    )#.set_index(x_label.replace(' ',''))
 
     return df
