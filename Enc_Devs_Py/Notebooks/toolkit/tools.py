@@ -1,5 +1,12 @@
 import itertools
 import pandas as pd
+import random
+
+
+def explode_pie(exp_range):
+    """Returns a list of values to explode pie chart."""
+    return [random.uniform(0.01,0.04) for i in range(0,exp_range)]
+    
 
 
 def get_column_uniques(df, col):
