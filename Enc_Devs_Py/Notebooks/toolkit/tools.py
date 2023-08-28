@@ -2,7 +2,16 @@ import itertools
 import pandas as pd
 import random
 
-
+def replace_column_content(df,col, repl):
+    df[col].replace(
+    repl
+    ,
+    regex=True,
+    inplace=True,
+    )
+    
+    
+    
 def get_color(g, t):
     # Light
     color_hombres_light = (12 / 255, 50 / 255, 196 / 255, 0.5)
@@ -49,7 +58,7 @@ def get_column_uniques(df, col):
     ite 1, item 2, item 3
     """
 
-    return list(set(itertools.chain.from_iterable([i.split(";") for i in df[col]])))
+    return list(set(itertools.chain.from_iterable([i.split(";") for i in df[col].dropna()])))
 
 
 def print_column_uniques(df, col):
