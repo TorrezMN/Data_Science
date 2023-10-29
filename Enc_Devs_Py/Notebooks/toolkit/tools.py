@@ -55,7 +55,24 @@ def get_color(g, t):
     else:
         return cd.get(g, color_none)
 
+def get_percentage(value):
+  """Returns the corresponding percentage in integer value for the given value.
 
+  Args:
+    value: A float value between 0 and 1.
+
+  Returns:
+    An integer value representing the percentage.
+  """
+
+  # Multiply the value by 100 to get the percentage.
+  percentage = value * 100
+
+  # Round the percentage to the nearest integer value.
+  percentage = round(percentage)
+
+  return (F'{percentage}%')
+    
 def percentage_to_normal(df):
     return df.mul(100).round(1).astype(str) + " %"
 
@@ -218,34 +235,47 @@ def make_horizontal_grouped_chart (df, g1,g2,col,labels, config):
     
     for k,v in enumerate(rects1):
         height = v.get_height()
-        
-        # Set the position of the annotation text
-        x_pos = v.get_x() + v.get_width() 
+
+        if(len(labels)>=10):
+            # Set the position of the annotation text
+            x_pos = v.get_x() + v.get_width()+1
+        else:
+            # Set the position of the annotation text
+            x_pos = v.get_x() + v.get_width()+0.5
+            
         #x_pos = v.get_x() + v.get_width() / 2
-        y_pos = v.get_y()  -0.05
+        y_pos = v.get_y() - height*0.05 -.05
         #y_pos = v.get_y() + height
         
         # Add the annotation text
         if (int(g1_val[k])!=0):
             #x_pos = v.get_x() + v.get_width() 
             #ax.annotate(str(g1_val[k]), (x_pos, y_pos), ha='center', va='bottom')
-            ax.annotate(str(v.get_width() ), (x_pos+3, y_pos), ha='center', va='bottom')
+            ax.annotate('  '+str(g1_val[k]) , (x_pos, y_pos), ha='center', va='bottom')
 
 
     for k,v in enumerate(rects2):
         height = v.get_height()
         
         # Set the position of the annotation text
-        x_pos = v.get_x() + v.get_width()
+        #x_pos = v.get_x() + v.get_width()+1
+        
+        if(len(labels)>=10):
+            # Set the position of the annotation text
+            x_pos = v.get_x() + v.get_width()+1
+        else:
+            # Set the position of the annotation text
+            x_pos = v.get_x() + v.get_width()+0.5
+            
         #x_pos = v.get_x() + v.get_width() + 5
         #x_pos = v.get_x() + v.get_width() / 2
-        y_pos = v.get_y()  
+        y_pos = v.get_y() - height*0.05 -.05
         #y_pos = v.get_y() + height
         
         # Add the annotation text
         if (int(g2_val[k])!=0):
             #ax.annotate(str(g2_val[k]), (x_pos, y_pos), ha='center', va='bottom')
-            ax.annotate(str(v.get_width() ), (x_pos+3, y_pos), ha='center', va='bottom')
+            ax.annotate('  '+str(g2_val[k]), (x_pos, y_pos), ha='center', va='bottom')
     
 
 
@@ -254,3 +284,37 @@ def make_horizontal_grouped_chart (df, g1,g2,col,labels, config):
     
     fig.tight_layout()
     plt.show()
+
+
+
+
+
+
+def make_normalized_df(df, col):
+    """Splits each row content by ";" and counts how many times each 'unique' value splitted by ';' appears in the column and returns a df with the keys and the percentage of times that appear in the column, forcing the numbers to be 'float' values.
+    
+    Args:
+    df: The dataframe to work.
+    col: The column to work.
+    
+    Returns:
+    A Pandas DataFrame with the following columns:
+    * categories: The unique values splitted by ";" in the column.
+    * total count: The percentage of times that each category appears in the column.
+    """
+    # Split each row content by ";"
+    df_split = df[col].str.split(';').explode()
+    
+    # Count how many times each unique value appears in the column
+    df_counts = df_split.value_counts().reset_index(name='total count')
+    
+    # Calculate the percentage of times each category appears in the column
+    df_counts['total count'] = df_counts['total count'] / df_counts['total count'].sum() * 100
+    
+    # Rename the columns
+    df_counts.columns = ['categories', 'total count']
+    
+    # Set the index to the 'categories' column
+    df_counts = df_counts.set_index('categories')
+    
+    return (df_counts)
