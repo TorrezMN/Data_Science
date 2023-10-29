@@ -4,7 +4,7 @@ import random
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+ 
        
 def replace_column_content(df,col, repl):
     """Replaces the contents of a column in a Pandas DataFrame with a given string,
@@ -220,26 +220,32 @@ def make_horizontal_grouped_chart (df, g1,g2,col,labels, config):
         height = v.get_height()
         
         # Set the position of the annotation text
-        x_pos = v.get_x() + v.get_width() + 3
+        x_pos = v.get_x() + v.get_width() 
         #x_pos = v.get_x() + v.get_width() / 2
-        y_pos = v.get_y()  
+        y_pos = v.get_y()  -0.05
         #y_pos = v.get_y() + height
         
         # Add the annotation text
-        ax.annotate(str(g1_val[k]), (x_pos, y_pos), ha='center', va='bottom')
+        if (int(g1_val[k])!=0):
+            #x_pos = v.get_x() + v.get_width() 
+            #ax.annotate(str(g1_val[k]), (x_pos, y_pos), ha='center', va='bottom')
+            ax.annotate(str(v.get_width() ), (x_pos+3, y_pos), ha='center', va='bottom')
 
 
     for k,v in enumerate(rects2):
         height = v.get_height()
         
         # Set the position of the annotation text
-        x_pos = v.get_x() + v.get_width() + 3
+        x_pos = v.get_x() + v.get_width()
+        #x_pos = v.get_x() + v.get_width() + 5
         #x_pos = v.get_x() + v.get_width() / 2
         y_pos = v.get_y()  
         #y_pos = v.get_y() + height
         
         # Add the annotation text
-        ax.annotate(str(g2_val[k]), (x_pos, y_pos), ha='center', va='bottom')
+        if (int(g2_val[k])!=0):
+            #ax.annotate(str(g2_val[k]), (x_pos, y_pos), ha='center', va='bottom')
+            ax.annotate(str(v.get_width() ), (x_pos+3, y_pos), ha='center', va='bottom')
     
 
 
