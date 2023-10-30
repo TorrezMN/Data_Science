@@ -5,6 +5,34 @@ import matplotlib.pyplot as plt
 import numpy as np
 
  
+def random_hex():
+    """Generates a random dark Material color in hex format.
+    
+    Returns:
+    A string representing the random dark Material color in hex format, e.g. '#121212'.
+    """
+    
+    # List of dark Material colors
+    dark_material_colors = [
+    "#121212",
+    "#1E88E5",
+    "#00897B",
+    "#39BBB0",
+    "#26C6DA",
+    "#42A5F5",
+    "#64B5F6",
+    "#9C27B0",
+    "#E91E63",
+    "#F44336",
+    "#D81B60",
+    "#880E4F"
+    ]
+    
+    # Choose a random color from the list
+    random_color = random.choice(dark_material_colors)
+    
+    return random_color
+
        
 def replace_column_content(df,col, repl):
     """Replaces the contents of a column in a Pandas DataFrame with a given string,
@@ -126,6 +154,21 @@ def make_df(df, col, x_label, y_label):
 
     return df
 
+
+def get_normalized_uniques_col_count(df, col):
+    c = set(
+        itertools.chain.from_iterable(
+            [i.split(";") for i in df[col].value_counts(normalize=True).keys()]
+        )
+    )
+    cats = {i: 0 for i in c}
+    for i in c:
+        cats[i] = df[df[col].str.contains(i)].shape[0]
+
+    return(cats)
+
+
+
 def get_uniques_col_count(df, col):
     c = set(
         itertools.chain.from_iterable(
@@ -181,6 +224,7 @@ def make_vertical_grouped_chart (df, g1,g2,col,labels, config):
         """Attach a text label above each bar in *rects*, displaying its height."""
         for rect in rects:
             height = rect.get_height()
+            
             ax.annotate('{}'.format(height),
                         xy=(rect.get_x() + rect.get_width() / 2, height),
                         xytext=(0, 3),  # 3 points vertical offset
@@ -286,7 +330,38 @@ def make_horizontal_grouped_chart (df, g1,g2,col,labels, config):
     plt.show()
 
 
+def make_grouped_pie_chart(df,df1,df2,col):
+    labels = get_column_uniques(df, col)
+    g1_count = get_uniques_col_count(df1, col)
+    g2_count = get_uniques_col_count(df2, col)
+    colors = [random_hex() for i in labels]
+    
+    # Values
+    g1_val = [g1_count.get(i, 0) for i in labels]
+    g2_val = [g2_count.get(i, 0) for i in labels]
+    
+    # Create a figure and subplots
+    fig, ax = plt.subplots(figsize=(10, 6))
+    
+    # Create an outer pie chart
+    ax.pie(g2_val, radius=0.9, 
+           labels=labels,
+           autopct="%1.1f%%", wedgeprops=dict(width=0.3), colors=colors)
+    
+    # Create an inner pie chart
+    ax.pie(g1_val,radius=0.5,
+           #labels=labels,
+           autopct="%1.1f%%", wedgeprops=dict(width=0.3), colors=colors)
 
+
+
+    # Set legends.
+    ax.legend(labels=labels, loc="upper left")
+    # Set a title and show the plot
+    ax.set_title("Nested Pie Chart")
+    plt.show()
+     
+  
 
 
 
