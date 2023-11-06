@@ -93,6 +93,8 @@ def get_percentage(value):
     An integer value representing the percentage.
   """
 
+
+
   # Multiply the value by 100 to get the percentage.
   percentage = value * 100
 
@@ -101,13 +103,13 @@ def get_percentage(value):
 
   return (F'{percentage}%')
     
-def percentage_to_normal(df):
-    return df.mul(100).round(1).astype(str) + " %"
+def percentage_to_normal(val):
+    return val.mul(100).round(1).astype(str) + " %"
 
 
-def explode_pie(exp_range):
-    """Returns a list of values to explode pie chart."""
-    exp = [random.uniform(0.01, 0.05) for i in range(0, exp_range)]
+def explode_pie(pie_size):
+    """Returns a list of values to explode pie chart. """
+    exp = [random.uniform(0.01, 0.05) for i in range(0, pie_size)]
     return exp
 
 
@@ -131,6 +133,58 @@ def print_column_uniques(df, col):
     print(set(itertools.chain.from_iterable([i.split(";") for i in df[col]])))
 
 
+
+def make_dataframe(df, col, cat_col, count_col):
+    """
+    Creates a Pandas DataFrame from a column with multiple categories.
+    
+    Args:
+    df: The Pandas DataFrame.
+    col: The column with multiple categories.
+    cat_col: The column name of the new DataFrame that will contain the unique categories.
+    count_col: The column name of the new DataFrame that will contain the number of times each category appears.
+    
+    Returns:
+    A Pandas DataFrame with the unique categories and their counts.
+    """
+    
+    # Drop all rows with float values from the DataFrame.
+    df = df.dropna(subset=[col])
+    
+    # Get all unique categories in the column.
+    categories = set(itertools.chain.from_iterable([i.split(";") for i in df[col].values]))
+    
+    # Create a dictionary to store the category counts.
+    category_counts = {}
+    for category in categories:
+        category_counts[category] = df[df[col].str.contains(category)].shape[0]
+    
+    # Create a new DataFrame from the category counts dictionary.
+    new_df = pd.DataFrame(data=category_counts.items(), columns=[cat_col, count_col])
+    
+    return new_df
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def make_df(df, col, x_label, y_label):
     """
     Returns a dataframe from column values.
@@ -146,7 +200,9 @@ def make_df(df, col, x_label, y_label):
     )
     cats = {i: 0 for i in c}
     for i in c:
+        df[col] = df[col].fillna(False)
         cats[i] = df[df[col].str.contains(i)].shape[0]
+        
     df = pd.DataFrame(
         data=[i for i in cats.items()],
         columns=[x_label.replace(" ", ""), y_label.replace(" ", "")],
@@ -155,7 +211,7 @@ def make_df(df, col, x_label, y_label):
     return df
 
 
-def get_normalized_uniques_col_count(df, col):
+def get_normal_uniques_col_count(df, col):
     c = set(
         itertools.chain.from_iterable(
             [i.split(";") for i in df[col].value_counts(normalize=True).keys()]
@@ -180,8 +236,19 @@ def get_uniques_col_count(df, col):
         cats[i] = df[df[col].str.contains(i)].shape[0]
 
     return(cats)
+ 
 
 
+
+
+
+
+
+
+
+
+
+    
 def make_vertical_grouped_chart (df, g1,g2,col,labels, config):
 
     """
@@ -282,13 +349,13 @@ def make_horizontal_grouped_chart (df, g1,g2,col,labels, config):
 
         if(len(labels)>=10):
             # Set the position of the annotation text
-            x_pos = v.get_x() + v.get_width()+1
+            x_pos = v.get_x() + v.get_width()+1.5
         else:
             # Set the position of the annotation text
-            x_pos = v.get_x() + v.get_width()+0.5
+            x_pos = v.get_x() + v.get_width()+1
             
         #x_pos = v.get_x() + v.get_width() / 2
-        y_pos = v.get_y() - height*0.05 -.05
+        y_pos = v.get_y() - height*0.5
         #y_pos = v.get_y() + height
         
         # Add the annotation text
@@ -329,42 +396,6 @@ def make_horizontal_grouped_chart (df, g1,g2,col,labels, config):
     fig.tight_layout()
     plt.show()
 
-
-def make_grouped_pie_chart(df,df1,df2,col):
-    labels = get_column_uniques(df, col)
-    g1_count = get_uniques_col_count(df1, col)
-    g2_count = get_uniques_col_count(df2, col)
-    colors = [random_hex() for i in labels]
-    
-    # Values
-    g1_val = [g1_count.get(i, 0) for i in labels]
-    g2_val = [g2_count.get(i, 0) for i in labels]
-    
-    # Create a figure and subplots
-    fig, ax = plt.subplots(figsize=(10, 6))
-    
-    # Create an outer pie chart
-    ax.pie(g2_val, radius=0.9, 
-           labels=labels,
-           autopct="%1.1f%%", wedgeprops=dict(width=0.3), colors=colors)
-    
-    # Create an inner pie chart
-    ax.pie(g1_val,radius=0.5,
-           #labels=labels,
-           autopct="%1.1f%%", wedgeprops=dict(width=0.3), colors=colors)
-
-
-
-    # Set legends.
-    ax.legend(labels=labels, loc="upper left")
-    # Set a title and show the plot
-    ax.set_title("Nested Pie Chart")
-    plt.show()
-     
-  
-
-
-
 def make_normalized_df(df, col):
     """Splits each row content by ";" and counts how many times each 'unique' value splitted by ';' appears in the column and returns a df with the keys and the percentage of times that appear in the column, forcing the numbers to be 'float' values.
     
@@ -393,3 +424,122 @@ def make_normalized_df(df, col):
     df_counts = df_counts.set_index('categories')
     
     return (df_counts)
+
+
+
+def make_horizontal_bar(df,col,titulo, x_label, y_label,legend):
+    """Makes a horizontal bar chart from a Pandas DataFrame.
+    
+        Args:
+            df: A Pandas DataFrame.
+            col: The column string name to plot.
+            titulo: The string title of the chart.
+            x_label: The 'x label' string name to be shown in the chart.
+            y_label: The 'y label' string name to be shown in the chart.
+            legend: Boolean value to set 'legends' to the chart.
+            
+        Returns:
+            None.
+    """
+    
+    # Making a plot for this column.
+    fig = plt.figure(figsize=(9, 5))
+
+    aux_df = make_df(df, col, "categorias", "conteo")
+
+    
+    aux_df_plot = aux_df.plot(
+    kind="barh",
+    title=f"{titulo} \n",
+    legend=legend
+    )
+    
+    aux_df_column_uniques = get_column_uniques(df, col)
+    
+    
+    aux_df_plot.set_yticks([k for k, v in enumerate(aux_df_column_uniques)], minor=False)
+    
+    aux_df_plot.set_yticklabels(
+        [i for i in aux_df_column_uniques],
+        fontdict=None,
+        minor=False,
+    )
+    
+    
+    aux_df_plot.set_xlabel(f"{x_label}")
+    aux_df_plot.set_ylabel(f"{y_label}")
+    
+    
+    cat_values = [i for i in aux_df.conteo.value_counts().keys()]
+    
+    
+    # Plot annotations.
+    for k, v in enumerate(cat_values):
+        aux_df_plot.annotate(v, (v, k), va="center")
+    
+        # nv_ed_plot.annotate(v, (v,k),va='center')
+    
+    plt.show()
+
+
+
+def make_custom_horizontal_bar(df,col,titulo, x_label, y_label,legend):
+    """Makes a horizontal bar chart from a Pandas DataFrame.
+    
+        Args:
+            df: A Pandas DataFrame.
+            col: The column string name to plot.
+            titulo: The string title of the chart.
+            x_label: The 'x label' string name to be shown in the chart.
+            y_label: The 'y label' string name to be shown in the chart.
+            legend: Boolean value to set 'legends' to the chart.
+            
+        Returns:
+            None.
+    """
+    
+    # Making a plot for this column.
+    fig = plt.figure(figsize=(9, 5))
+
+
+
+    # aux_df = make_df(df, col, "categorias", "conteo")
+
+    
+    
+    aux_df_plot = df.plot(
+    kind="barh",
+    title=f"{titulo} \n",
+    legend=legend
+    )
+    
+    aux_df_column_uniques = get_column_uniques(df, 'Category')
+    
+    
+    aux_df_plot.set_yticks([k for k, v in enumerate(aux_df_column_uniques)], minor=False)
+    
+    aux_df_plot.set_yticklabels(
+        [i for i in aux_df_column_uniques],
+        fontdict=None,
+        minor=False,
+    )
+    
+    
+    aux_df_plot.set_xlabel(f"{x_label}")
+    aux_df_plot.set_ylabel(f"{y_label}")
+    
+    
+    cat_values = [i for i in df['count'].value_counts().keys()]
+    
+    
+    # Plot annotations.
+    for k, v in enumerate(cat_values):
+        aux_df_plot.annotate(v, (v, k), va="center")
+    
+        # nv_ed_plot.annotate(v, (v,k),va='center')
+    
+    plt.show()
+
+
+
+
