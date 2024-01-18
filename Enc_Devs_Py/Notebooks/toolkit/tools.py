@@ -321,7 +321,7 @@ def make_horizontal_grouped_chart(df, g1, g2, col, labels, config):
             x_pos = v.get_x() + v.get_width() + 1
 
         # x_pos = v.get_x() + v.get_width() / 2
-        y_pos = v.get_y() - height * 0.5
+        y_pos = v.get_y() + height * 0.05
         # y_pos = v.get_y() + height
 
         # Add the annotation text
@@ -345,7 +345,7 @@ def make_horizontal_grouped_chart(df, g1, g2, col, labels, config):
 
         # x_pos = v.get_x() + v.get_width() + 5
         # x_pos = v.get_x() + v.get_width() / 2
-        y_pos = v.get_y() - height * 0.05 - 0.05
+        y_pos = v.get_y() + height * 0.05
         # y_pos = v.get_y() + height
 
         # Add the annotation text
@@ -481,5 +481,67 @@ def make_custom_horizontal_bar(df, col, titulo, x_label, y_label, legend):
         aux_df_plot.annotate(v, (v, k), va="center")
 
         # nv_ed_plot.annotate(v, (v,k),va='center')
+
+    plt.show()
+
+
+def print_normalized_table(g, col, titulo):
+    d = g[col].value_counts(normalize=True)
+
+    print(titulo)
+    print(d)
+
+
+def horizontal_bar_reverted(df1, df2, title, col):
+    plt.figure(figsize=(15, 50), dpi=80)
+
+    # g = [i for i in generos.groups.keys()]
+
+    aux_df1 = make_df(df1, col, "Categories", "Total")
+    aux_df2 = make_df(df2, col, "Categories", "Total")
+
+    # aux1_ch_values = [i for i in aux_df1["Total"]]
+    # aux2_ch_values = [i for i in aux_df2["Total"]]
+
+    # #female_ch_values.insert(1, 0)
+
+    # fig, axes = plt.subplots(figsize=(10, 5), ncols=2, sharey=True)
+
+    # # fig.tight_layout()
+
+    # df1_bar_plot = axes[0].barh(
+    # aux_df1["Categories"],
+    # aux_df1["Total"],
+    # align="center",
+    # #color=get_color("HOMBRE", "light"),
+    # zorder=10,
+    # )
+
+    # for i, value in enumerate(aux1_ch_values):
+    #     axes[0].text(value + 5, i, str(value), ha="center", va="center")
+
+    # # female_bar_plot = axes[1].barh(
+    # # female_df["Categories"],
+    # # female_df["Total"],
+    # # align="center",
+    # # color=get_color("MUJER", "light"),
+    # # zorder=10,
+    # # )
+
+    # for i, value in enumerate(female_ch_values):
+    #     if value != 0:
+    #         axes[1].text(value + 0.5, i, str(value), ha="center", va="center")
+
+    # # If you have positive numbers and want to invert the x-axis of the left plot
+    # axes[0].invert_xaxis()
+
+    # # To show data from highest to lowest
+    # plt.gca().invert_yaxis()
+
+    # Setting titles.
+    # axes[0].set_title("Type of job. \n HOMBRE")
+    # axes[1].set_title("Type of job. \n MUJER")
+
+    # plt.subplots_adjust(wspace=0, top=0.85, bottom=0.1, left=0.18, right=0.95)
 
     plt.show()
