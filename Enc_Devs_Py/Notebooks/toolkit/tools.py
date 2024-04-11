@@ -328,7 +328,9 @@ def make_horizontal_grouped_chart(df, g1, g2, col, labels, config):
         if int(g1_val[k]) != 0:
             # x_pos = v.get_x() + v.get_width()
             # ax.annotate(str(g1_val[k]), (x_pos, y_pos), ha='center', va='bottom')
-            ax.annotate("  " + str(g1_val[k]), (x_pos, y_pos), ha="center", va="bottom")
+            ax.annotate(
+                "  " + str(g1_val[k]), (x_pos * 1, y_pos), ha="center", va="bottom"
+            )
 
     for k, v in enumerate(rects2):
         height = v.get_height()
